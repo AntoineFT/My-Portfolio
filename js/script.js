@@ -1,9 +1,25 @@
 function openBook() {
-    const cover = document.querySelector('.cover');
-    const inside = document.querySelector('.inside');
-    gsap.to(cover, { rotationY: -180, duration: 1, ease: "power2.inOut" });
-    setTimeout(() => {
-        cover.classList.add('open');
-        inside.classList.add('visible');
-    }, 500);
+    const book = document.querySelector('.book');
+    const front = document.querySelector('.front');
+    const pages = document.querySelectorAll('.page');
+
+    // Animation de zoom initial
+    gsap.to(book, {
+        scale: 1.5,
+        duration: 0.5,
+        ease: "power2.in",
+        onComplete: () => {
+            // Ouverture du livre
+            gsap.to(book, {
+                rotationY: -180,
+                duration: 1.5,
+                ease: "power2.out",
+                onStart: () => {
+                    front.style.zIndex = 1; // Passe la couverture derrière
+                    pages.forEach(page => page.style.display = 'block'); // Affiche les pages
+                }
+            });
+            gsap.to(book, { scale: 1, duration: 1, delay: 0.5 });
+        }
+    });
 }
