@@ -4,14 +4,14 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #333; /* Fond gris foncé */
+    background: #222; /* Fond gris foncé plus sombre */
     overflow: hidden;
     font-family: 'Bangers', cursive;
 }
 
 .book-container {
-    perspective: 1500px;
-    width: 800px;
+    perspective: 2000px; /* Perspective plus profonde pour l’effet 3D */
+    width: 900px;
     height: 600px;
     position: relative;
 }
@@ -21,7 +21,6 @@ body {
     height: 100%;
     position: relative;
     transform-style: preserve-3d;
-    transition: transform 1.5s ease;
 }
 
 .cover {
@@ -29,28 +28,21 @@ body {
     height: 100%;
     position: absolute;
     top: 0;
+    left: 50%;
     transform-origin: left;
     background: linear-gradient(45deg, #ff0000, #ffcc00); /* Rouge à jaune */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    text-shadow: 2px 2px 4px #000;
+    border: 5px solid #000; /* Bordure comics */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7);
     cursor: pointer;
-}
-
-.front {
     z-index: 2;
-    left: 50%;
-    transform: translateX(-50%);
+    transition: transform 1.5s ease;
 }
 
-.back {
-    left: 0;
-    background: #ff0000; /* Rouge uni pour l’arrière */
-    transform: rotateY(180deg);
+.cover-content {
+    color: #fff;
+    text-shadow: 3px 3px 6px #000;
+    text-align: center;
+    padding: 20px;
 }
 
 .page {
@@ -59,35 +51,55 @@ body {
     position: absolute;
     top: 0;
     background: #fff;
-    padding: 20px;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
-    display: none; /* Caché par défaut */
+    border: 2px solid #000;
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.2);
+    transform-origin: left;
+    transform: rotateY(0deg);
+    transition: transform 1.5s ease;
+    z-index: 1;
 }
 
-.left {
+.left-page {
     left: 0;
+    transform: rotateY(-180deg); /* Position initiale cachée */
 }
 
-.right {
+.right-page {
     left: 50%;
 }
 
+.page-content {
+    padding: 20px;
+    opacity: 0; /* Caché au départ */
+    transition: opacity 0.5s ease;
+}
+
 h1 {
-    font-size: 48px;
+    font-size: 60px;
     margin: 0;
+    letter-spacing: 2px;
 }
 
 h2 {
-    font-size: 32px;
+    font-size: 36px;
     color: #ff0000;
     text-align: center;
+    margin-bottom: 10px;
 }
 
 p {
-    font-size: 24px;
+    font-size: 28px;
 }
 
-/* Animation au clic */
-.book.open {
+/* Classes pour l’animation */
+.cover.open {
     transform: rotateY(-180deg);
+}
+
+.left-page.open {
+    transform: rotateY(0deg);
+}
+
+.page-content.visible {
+    opacity: 1;
 }
