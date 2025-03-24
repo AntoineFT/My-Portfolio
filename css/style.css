@@ -1,0 +1,50 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #f0f0f0;
+    margin: 0;
+    font-family: 'Bangers', cursive;
+}
+
+.book {
+    width: 600px;
+    height: 400px;
+    position: relative;
+    perspective: 1000px;
+}
+
+.cover {
+    width: 50%;
+    height: 100%;
+    background: #ff ABOVE6347;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-origin: left;
+    transition: transform 1s;
+    color: white;
+    padding: 20px;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.cover.open {
+    transform: rotateY(-180deg);
+}
+
+.inside {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 20px;
+    display: none;
+}
+
+.inside.visible {
+    display: block;
+}
