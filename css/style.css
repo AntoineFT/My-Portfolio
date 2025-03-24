@@ -1,50 +1,93 @@
 body {
+    margin: 0;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background: #f0f0f0;
-    margin: 0;
+    background: #333; /* Fond gris foncé */
+    overflow: hidden;
     font-family: 'Bangers', cursive;
 }
 
-.book {
-    width: 600px;
-    height: 400px;
+.book-container {
+    perspective: 1500px;
+    width: 800px;
+    height: 600px;
     position: relative;
-    perspective: 1000px;
+}
+
+.book {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 1.5s ease;
 }
 
 .cover {
     width: 50%;
     height: 100%;
-    background: #ff ABOVE6347;
     position: absolute;
     top: 0;
-    left: 0;
     transform-origin: left;
-    transition: transform 1s;
-    color: white;
-    padding: 20px;
+    background: linear-gradient(45deg, #ff0000, #ffcc00); /* Rouge à jaune */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-shadow: 2px 2px 4px #000;
     cursor: pointer;
+}
+
+.front {
     z-index: 2;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
-.cover.open {
-    transform: rotateY(-180deg);
+.back {
+    left: 0;
+    background: #ff0000; /* Rouge uni pour l’arrière */
+    transform: rotateY(180deg);
 }
 
-.inside {
-    width: 100%;
+.page {
+    width: 50%;
     height: 100%;
-    background: #fff;
     position: absolute;
     top: 0;
-    left: 0;
+    background: #fff;
     padding: 20px;
-    display: none;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+    display: none; /* Caché par défaut */
 }
 
-.inside.visible {
-    display: block;
+.left {
+    left: 0;
+}
+
+.right {
+    left: 50%;
+}
+
+h1 {
+    font-size: 48px;
+    margin: 0;
+}
+
+h2 {
+    font-size: 32px;
+    color: #ff0000;
+    text-align: center;
+}
+
+p {
+    font-size: 24px;
+}
+
+/* Animation au clic */
+.book.open {
+    transform: rotateY(-180deg);
 }
